@@ -3,15 +3,17 @@
 
 int main(int, char**){
   Workspace w = HyprlandService::getCurrentWorkspace();
-  std::cout << w.id << std::endl;
-  std::cout << w.name << std::endl;
-  std::cout << w.monitor << std::endl;
-  std::cout << w.monitorID << std::endl;
-  std::cout << w.windows << std::endl;
-  std::cout << w.hasfullscreen << std::endl;
-  std::cout << w.lastwindow << std::endl;
-  std::cout << w.lastwindowtitle << std::endl;
-  std::cout << w.ispersistent;
+  std::cout << "Active workspace:" << std::endl;
+  std::cout << "  id: " << w.id << std::endl;
+  std::cout << "  name: " << w.name << std::endl;
+  std::cout << "  monitor: " << w.monitor << std::endl;
+  std::cout << "  monitorID: " << w.monitorID << std::endl;
+  std::cout << "  windows: " << w.windows << std::endl;
+  std::cout << "  hasfullscreen: " << w.hasfullscreen << std::endl;
+  std::cout << "  lastwindow: " << w.lastwindow << std::endl;
+  std::cout << "  lastwindowtitle: " << w.lastwindowtitle << std::endl;
+  std::cout << "  ispersistent: " << w.ispersistent << std::endl;
+  std::cout << std::endl;
 
   std::list<Client> clients = HyprlandService::getClients();
   for (const auto& c : clients) {
