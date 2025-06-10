@@ -1,35 +1,18 @@
+#include <nlohmann/json.hpp>
 #include "../include/HyprlandService.h"
+#include "../include/ShellService.h"
+#include "../include/Macros.h"
+#include "../include/FileService.h"
 
 using json = nlohmann::json;
 
-std::string HyprlandService::exec(const std::string& command) {
-  char buffer[128];
-  std::string result = "";
-
-  FILE* pipe = popen(command.c_str(), "r");
-  if (!pipe) {
-	return "popen failed";
-  }
-
-  while (fgets(buffer, sizeof(buffer), pipe) != NULL) {
-	result += buffer;
-  }
-
-  int status = pclose(pipe);
-  if (status == -1) {
-	return "Error closing pipe";
-  }
-
-  return result;
-};
-
 Workspace HyprlandService::getCurrentWorkspace() {
-  json j = json::parse(exec(HYPRCTL_BINARY " activeworkspace -j"));
+  json j = json::parse(ShellService::exec(HYPRCTL_BINARY " activeworkspace -j"));
   return j.get<Workspace>();
 };
 
 std::list<Client> HyprlandService::getClients() {
-  json j = json::parse(exec(HYPRCTL_BINARY " clients -j"));
+  json j = json::parse(ShellService::exec(HYPRCTL_BINARY " clients -j"));
   return j.get<std::list<Client>>();
 };
 
@@ -49,15 +32,15 @@ std::list<Client> HyprlandService::getClientsOnActiveWorkspace() {
 };
 
 void HyprlandService::setClientFloating(Client& c) {
-  exec(HYPRCTL_BINARY " dispatch setfloating address:" + c.address);
+  ShellService::exec(HYPRCTL_BINARY " dispatch setfloating address:" + c.address);
 };
 
 void HyprlandService::setClientTiled(Client& c) {
-  exec(HYPRCTL_BINARY " dispatch settiled address:" + c.address);
+  ShellService::exec(HYPRCTL_BINARY " dispatch settiled address:" + c.address);
 }
 
 void HyprlandService::toggleClientFloating(Client& c) {
-  exec(HYPRCTL_BINARY " dispatch togglefloating address:" + c.address);
+  ShellService::exec(HYPRCTL_BINARY " dispatch togglefloating address:" + c.address);
 };
 
 void HyprlandService::setFloatingRule(bool b) {
