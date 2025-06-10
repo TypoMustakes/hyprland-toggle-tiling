@@ -1,6 +1,4 @@
-#include <iostream>
 #include "../include/HyprlandService.h"
-#include <unistd.h>
 
 int main(int, char**){
   for (auto& c : HyprlandService::getClientsOnActiveWorkspace()) {

@@ -2,10 +2,8 @@
 #define HYPRLAND_SERVICE_H
 
 #include <list>
-#include <string>
 #include "Workspace.h"
 #include "Client.h"
-#include <nlohmann/json.hpp>
 
 class HyprlandService {
  public:
