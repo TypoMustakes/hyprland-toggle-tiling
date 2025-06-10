@@ -16,6 +16,6 @@ class HyprlandService {
   static void setClientFloating(Client&);
   static void setClientTiled(Client&);
   static void toggleClientFloating(Client&);
-  static std::string exec(const std::string& command);
+  static bool isFloatingRulePresent();
 };
 #endif
