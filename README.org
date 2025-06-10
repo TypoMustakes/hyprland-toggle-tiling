@@ -1,0 +1,35 @@
+#+TITLE: hyprland-toggle-tiling
+#+AUTHOR: Your Name
+#+OPTIONS: toc:nil
+
+* hyprland-toggle-tiling
+
+A simple script to toggle tiling and floating modes for windows in the Hyprland Wayland compositor.
+
+[[./demo.gif]]
+
+* Features
+
+- Quickly switch between tiling and floating modes for all windows on the active workspace.
+- Lightweight and easy to integrate with your Hyprland setup.
+- Useful for workflows that require both tiling and floating window management.
+
+* Compiling
+
+1. Clone this repository:
+    #+BEGIN_SRC shell
+    git clone https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling.git
+    #+END_SRC
+
+2. Build the projects:
+    #+BEGIN_SRC shell
+    cd build/
+    cmake --build .
+    #+END_SRC
+
+3. Bind the script to a key in your Hyprland config:
+    #+BEGIN_SRC conf
+    bind = $mod + t, exec, /path/to/htt
+    #+END_SRC
+
+Or just [[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.0][download the release]].
