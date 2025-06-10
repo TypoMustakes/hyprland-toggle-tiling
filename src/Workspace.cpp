@@ -1,4 +1,4 @@
-#include "Workspace.h"
+#include "../include/Workspace.h"
 
 void from_json(const nlohmann::json &j, Workspace &w) {
   j.at("id").get_to(w.id);

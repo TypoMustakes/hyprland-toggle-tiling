@@ -1,5 +1,5 @@
 #include <iostream>
-#include "HyprlandService.h"
+#include "../include/HyprlandService.h"
 
 int main(int, char**){
   Workspace w = HyprlandService::getCurrentWorkspace();

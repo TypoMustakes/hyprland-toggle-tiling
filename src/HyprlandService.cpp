@@ -1,4 +1,4 @@
-#include "HyprlandService.h"
+#include "../include/HyprlandService.h"
 
 using json = nlohmann::json;
 

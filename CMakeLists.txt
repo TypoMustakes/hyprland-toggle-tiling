@@ -5,6 +5,10 @@ include(FetchContent)
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz)
 FetchContent_MakeAvailable(json)
 
-add_executable(htt main.cpp HyprlandService.cpp Workspace.cpp Client.cpp)
+add_executable(htt
+	src/main.cpp
+	src/HyprlandService.cpp
+	src/Workspace.cpp
+	src/Client.cpp)
 target_link_libraries(htt PRIVATE nlohmann_json::nlohmann_json)
 target_include_directories(htt PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
