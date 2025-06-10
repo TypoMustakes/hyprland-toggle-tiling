@@ -9,6 +9,8 @@ add_executable(htt
 	src/main.cpp
 	src/HyprlandService.cpp
 	src/Workspace.cpp
+	src/ShellService.cpp
+	src/FileService.cpp
 	src/Client.cpp)
 target_link_libraries(htt PRIVATE nlohmann_json::nlohmann_json)
 target_include_directories(htt PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
