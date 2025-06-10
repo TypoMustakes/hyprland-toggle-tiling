@@ -57,5 +57,14 @@ void HyprlandService::setClientTiled(Client& c) {
 }
 
 void HyprlandService::toggleClientFloating(Client& c) {
-  exec("/usr/bin/hyprctl dispatch togglefloating address:" + c.address);
+  exec(HYPRCTL_BINARY " dispatch togglefloating address:" + c.address);
+};
+
+void HyprlandService::setFloatingRule(bool b) {
+  if (b) {
+    exec(SET_FLOATING_RULE);
+  }
+  else {
+    exec(REMOVE_FLOATING_RULE);
+  }
 };
