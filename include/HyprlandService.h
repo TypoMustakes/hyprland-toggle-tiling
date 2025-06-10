@@ -11,6 +11,10 @@ class HyprlandService {
  public:
   static Workspace getCurrentWorkspace();
   static std::list<Client> getClients();
+  static std::list<Client> getClientsOnActiveWorkspace();
+  static void setClientFloating(Client&);
+  static void setClientTiled(Client&);
+  static void toggleClientFloating(Client&);
   static std::string exec(const std::string& command);
 };
 #endif

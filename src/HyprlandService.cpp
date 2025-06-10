@@ -32,3 +32,30 @@ std::list<Client> HyprlandService::getClients() {
   json j = json::parse(exec("/usr/bin/hyprctl clients -j"));
   return j.get<std::list<Client>>();
 };
+
+std::list<Client> HyprlandService::getClientsOnActiveWorkspace() {
+  std::list<Client> clients = HyprlandService::getClients();
+  int activeWorkspaceID = HyprlandService::getCurrentWorkspace().id;
+
+  for (auto it = clients.begin(); it != clients.end(); ) {
+    if (it->workspace.id != activeWorkspaceID) {
+      it = clients.erase(it);
+    } else {
+      ++it;
+    }
+  }
+
+  return clients;
+};
+
+void HyprlandService::setClientFloating(Client& c) {
+  exec("/usr/bin/hyprctl dispatch setfloating address:" + c.address);
+};
+
+void HyprlandService::setClientTiled(Client& c) {
+  exec("/usr/bin/hyprctl dispatch settiled address:" + c.address);
+}
+
+void HyprlandService::toggleClientFloating(Client& c) {
+  exec("/usr/bin/hyprctl dispatch togglefloating address:" + c.address);
+};

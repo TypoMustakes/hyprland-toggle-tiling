@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/HyprlandService.h"
+#include <unistd.h>
 
 int main(int, char**){
   Workspace w = HyprlandService::getCurrentWorkspace();
@@ -14,6 +15,8 @@ int main(int, char**){
   std::cout << "  lastwindowtitle: " << w.lastwindowtitle << std::endl;
   std::cout << "  ispersistent: " << w.ispersistent << std::endl;
   std::cout << std::endl;
+
+  std::cout << "---------------------------------------------" << std::endl << std::endl;
 
   std::list<Client> clients = HyprlandService::getClients();
   for (const auto& c : clients) {
@@ -43,4 +46,33 @@ int main(int, char**){
       std::cout << "  xdgDescription: " << c.xdgDescription << std::endl;
       std::cout << std::endl;
     }
+
+  std::cout << "---------------------------------------------" << std::endl << std::endl;
+
+  std::list<Client> activeClients = HyprlandService::getClientsOnActiveWorkspace();
+  for (const auto& c : activeClients) {
+      std::cout << "Active client:" << std::endl;
+      std::cout << "  workspace.id: " << c.workspace.id << std::endl;
+      std::cout << "  workspace.name: " << c.workspace.name << std::endl;
+      std::cout << "  className: " << c.className << std::endl;
+      std::cout << "  title: " << c.title << std::endl;
+      std::cout << std::endl;
+    }
+
+
+  std::cout << "Setting " << activeClients.front().className << " into floating mode..." << std::endl;
+  sleep(2);
+  HyprlandService::setClientFloating(activeClients.front());
+
+  std::cout << "Setting " << activeClients.front().className << " into tiled mode..." << std::endl;
+  sleep(2);
+  HyprlandService::setClientTiled(activeClients.front());
+
+  std::cout << "Toggling floating mode for " << activeClients.front().className << " ..." << std::endl;
+  sleep(2);
+  HyprlandService::toggleClientFloating(activeClients.front());
+
+  std::cout << "Toggling floating mode for " << activeClients.front().className << " once more..." << std::endl;
+  sleep(2);
+  HyprlandService::toggleClientFloating(activeClients.front());
 }
