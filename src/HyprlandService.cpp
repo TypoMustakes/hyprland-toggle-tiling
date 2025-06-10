@@ -24,12 +24,12 @@ std::string HyprlandService::exec(const std::string& command) {
 };
 
 Workspace HyprlandService::getCurrentWorkspace() {
-  json j = json::parse(exec("/usr/bin/hyprctl activeworkspace -j"));
+  json j = json::parse(exec(HYPRCTL_BINARY " activeworkspace -j"));
   return j.get<Workspace>();
 };
 
 std::list<Client> HyprlandService::getClients() {
-  json j = json::parse(exec("/usr/bin/hyprctl clients -j"));
+  json j = json::parse(exec(HYPRCTL_BINARY " clients -j"));
   return j.get<std::list<Client>>();
 };
 
@@ -49,11 +49,11 @@ std::list<Client> HyprlandService::getClientsOnActiveWorkspace() {
 };
 
 void HyprlandService::setClientFloating(Client& c) {
-  exec("/usr/bin/hyprctl dispatch setfloating address:" + c.address);
+  exec(HYPRCTL_BINARY " dispatch setfloating address:" + c.address);
 };
 
 void HyprlandService::setClientTiled(Client& c) {
-  exec("/usr/bin/hyprctl dispatch settiled address:" + c.address);
+  exec(HYPRCTL_BINARY " dispatch settiled address:" + c.address);
 }
 
 void HyprlandService::toggleClientFloating(Client& c) {
