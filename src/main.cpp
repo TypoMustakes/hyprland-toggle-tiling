@@ -1,15 +1,15 @@
 #include "../include/HyprlandService.h"
 
 int main(int, char**){
-  for (auto& c : HyprlandService::getClientsOnActiveWorkspace()) {
-    HyprlandService::setClientFloating(c);
+  if (HyprlandService::isFloatingRulePresent()) {
+    for (auto& c : HyprlandService::getClientsOnActiveWorkspace()) {
+      HyprlandService::setClientTiled(c);
+    }
+    HyprlandService::setFloatingRule(false);
+  } else {
+    for (auto& c : HyprlandService::getClientsOnActiveWorkspace()) {
+      HyprlandService::setClientFloating(c);
+    }
+    HyprlandService::setFloatingRule(true);
   }
-  HyprlandService::setFloatingRule(true);
-
-  sleep(5);
-
-  for (auto& c : HyprlandService::getClientsOnActiveWorkspace()) {
-    HyprlandService::setClientTiled(c);
-  }
-  HyprlandService::setFloatingRule(false);
 }
