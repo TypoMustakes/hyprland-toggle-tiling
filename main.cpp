@@ -1,0 +1,44 @@
+#include <iostream>
+#include "HyprlandService.h"
+
+int main(int, char**){
+  Workspace w = HyprlandService::getCurrentWorkspace();
+  std::cout << w.id << std::endl;
+  std::cout << w.name << std::endl;
+  std::cout << w.monitor << std::endl;
+  std::cout << w.monitorID << std::endl;
+  std::cout << w.windows << std::endl;
+  std::cout << w.hasfullscreen << std::endl;
+  std::cout << w.lastwindow << std::endl;
+  std::cout << w.lastwindowtitle << std::endl;
+  std::cout << w.ispersistent;
+
+  std::list<Client> clients = HyprlandService::getClients();
+  for (const auto& c : clients) {
+      std::cout << "Client:" << std::endl;
+      std::cout << "  address: " << c.address << std::endl;
+      std::cout << "  mapped: " << c.mapped << std::endl;
+      std::cout << "  hidden: " << c.hidden << std::endl;
+      std::cout << "  size: [" << c.size[0] << ", " << c.size[1] << "]" << std::endl;
+      std::cout << "  workspace.id: " << c.workspace.id << std::endl;
+      std::cout << "  workspace.name: " << c.workspace.name << std::endl;
+      std::cout << "  floating: " << c.floating << std::endl;
+      std::cout << "  pseudo: " << c.pseudo << std::endl;
+      std::cout << "  monitor: " << c.monitor << std::endl;
+      std::cout << "  className: " << c.className << std::endl;
+      std::cout << "  title: " << c.title << std::endl;
+      std::cout << "  initialClass: " << c.initialClass << std::endl;
+      std::cout << "  initialTitle: " << c.initialTitle << std::endl;
+      std::cout << "  pid: " << c.pid << std::endl;
+      std::cout << "  xwayland: " << c.xwayland << std::endl;
+      std::cout << "  pinned: " << c.pinned << std::endl;
+      std::cout << "  fullscreen: " << c.fullscreen << std::endl;
+      std::cout << "  fullscreenClient: " << c.fullscreenClient << std::endl;
+      std::cout << "  swallowing: " << c.swallowing << std::endl;
+      std::cout << "  focusHistory: " << c.focusHistory << std::endl;
+      std::cout << "  inhibitingIdle: " << c.inhibitingIdle << std::endl;
+      std::cout << "  xdgTag: " << c.xdgTag << std::endl;
+      std::cout << "  xdgDescription: " << c.xdgDescription << std::endl;
+      std::cout << std::endl;
+    }
+}
