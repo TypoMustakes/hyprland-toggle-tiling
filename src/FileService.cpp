@@ -4,19 +4,55 @@
 #include "../include/Macros.h"
 #include "../include/ShellService.h"
 
-bool FileServices::doesNonEmptyFileExist(std::string path) {
+bool FileService::doesNonEmptyFileExist(std::string path) {
     std::ifstream file(path);
     return file.good() && file.peek() != std::ifstream::traits_type::eof();
 };
 
-void FileServices::emptyFile(std::string path) {
+void FileService::emptyFile(std::string path) {
     std::stringstream cmd;
     cmd << CAT_PATH << " " << NULL_PATH << " > " << path;
     ShellService::exec(cmd.str().c_str());
 };
 
-void FileServices::createOrOverwriteFile(std::string path, std::string content) {
+void FileService::createOrOverwriteFile(std::string path, std::string content) {
     std::stringstream cmd;
     cmd << ECHO_PATH << " " << content << " > " << path;
     ShellService::exec(cmd.str().c_str());
+};
+
+void FileService::appendToFile(std::string path, std::string content) {
+    std::stringstream cmd;
+    cmd << ECHO_PATH << " \"" << "\n" << content << "\" >> " << path;
+    ShellService::exec(cmd.str().c_str());
+};
+
+void FileService::deleteNthLine(std::string path, int n) {
+    std::vector<std::string> lines = readLines(path);
+
+    if (n < 0 || n >= static_cast<int>(lines.size())) {
+        // Out of bounds, do nothing
+        return;
+    }
+
+    lines.erase(lines.begin() + n);
+
+    std::ofstream file(path, std::ios::trunc);
+    for (size_t i = 0; i < lines.size(); ++i) {
+        file << lines[i];
+        if (i != lines.size() - 1) {
+            file << '\n';
+        }
+    }
+}
+
+std::vector<std::string> FileService::readLines(std::string path) {
+    std::vector<std::string> lines;
+    std::ifstream file(path);
+    std::string line;
+
+    while (std::getline(file, line)) {
+        lines.push_back(line);
+    }
+    return lines;
 };
