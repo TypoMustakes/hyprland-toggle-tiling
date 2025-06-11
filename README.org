@@ -24,7 +24,7 @@ A simple program to toggle tiling and floating modes for windows in the Hyprland
 - If the specified configuration file does not exist, it will be created.
 - If the configuration contains existing rules, this should still work, but your existing configuration will probably get a bit messy, syntax-wise. I advise against it.
 
-* Ingetration with Hyprland
+* Integration with Hyprland
 1. Whatever configuration path you specify, include it in your Hyprland config, like so:
    ~\~/path/to/your/hyprland.conf~:
    #+BEGIN_SRC conf
