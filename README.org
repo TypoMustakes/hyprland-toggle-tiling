@@ -54,4 +54,4 @@ A simple program to toggle tiling and floating modes for windows in the Hyprland
     cmake --build .
     #+END_SRC
 
-Or just [[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.0][download the release]].
+Or just [[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.1.0][download the release]].
