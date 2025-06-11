@@ -6,6 +6,4 @@
 #define ECHO_PATH "/usr/bin/echo"
 #define CAT_PATH "/usr/bin/cat"
 
-#define FLOATING_RULE "windowrule = float, onworkspace:"
-
 #endif
