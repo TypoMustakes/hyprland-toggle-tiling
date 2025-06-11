@@ -22,8 +22,13 @@ void FileService::createOrOverwriteFile(std::string path, std::string content) {
 };
 
 void FileService::appendToFile(std::string path, std::string content) {
+    bool fileNotEmpty = FileService::doesNonEmptyFileExist(path);
     std::stringstream cmd;
-    cmd << ECHO_PATH << " \"" << "\n" << content << "\" >> " << path;
+    if (fileNotEmpty) {
+        cmd << ECHO_PATH << " \"" << "\n" << content << "\" >> " << path;
+    } else {
+        cmd << ECHO_PATH << " \"" << content << "\" >> " << path;
+    }
     ShellService::exec(cmd.str().c_str());
 };
 
