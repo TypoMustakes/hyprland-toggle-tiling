@@ -48,9 +48,23 @@ A simple program to toggle tiling and floating modes for windows in the Hyprland
     git clone https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling.git
     #+END_SRC
 
-2. Build the projects:
+2. Enter project directory:
+    #+BEGIN_SRC shell
+    cd hyprland-toggle-tiling/
+    #+END_SRC
+
+3. Create build directory:
+    #+BEGIN_SRC shell
+    cmake -S . -B build/
+    #+END_SRC
+
+4. Enter build directory:
     #+BEGIN_SRC shell
     cd build/
+    #+END_SRC
+
+5. Build the projects:
+    #+BEGIN_SRC shell
     cmake --build .
     #+END_SRC
 
