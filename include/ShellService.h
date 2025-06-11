@@ -6,6 +6,7 @@
 class ShellService {
     public:
         static std::string exec(const std::string& command);
+        static std::string getHomePath();
 };
 
 #endif

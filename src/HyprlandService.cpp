@@ -45,13 +45,13 @@ void HyprlandService::toggleClientFloating(Client& c) {
 
 void HyprlandService::setFloatingRule(bool b) {
   if (b) {
-    FileServices::createOrOverwriteFile(FLOATING_RULE_CONF_FILE, FLOATING_RULE);
+    FileServices::createOrOverwriteFile(ShellService::getHomePath()+FLOATING_RULE_CONF_FILE, FLOATING_RULE);
   }
   else {
-    FileServices::emptyFile(FLOATING_RULE_CONF_FILE);
+    FileServices::emptyFile(ShellService::getHomePath()+FLOATING_RULE_CONF_FILE);
   }
 };
 
 bool HyprlandService::isFloatingRulePresent() {
-  return FileServices::doesNonEmptyFileExist(FLOATING_RULE_CONF_FILE);
+  return FileServices::doesNonEmptyFileExist(ShellService::getHomePath()+FLOATING_RULE_CONF_FILE);
 };
