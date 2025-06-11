@@ -4,7 +4,7 @@
 
 * hyprland-toggle-tiling
 
-A simple script to toggle tiling and floating modes for windows in the Hyprland Wayland compositor.
+A simple program to toggle tiling and floating modes for windows in the Hyprland Wayland compositor.
 
 [[./demo.gif]]
 
@@ -13,6 +13,9 @@ A simple script to toggle tiling and floating modes for windows in the Hyprland 
 - Quickly switch between tiling and floating modes for all windows on the active workspace.
 - Lightweight and easy to integrate with your Hyprland setup.
 - Useful for workflows that require both tiling and floating window management.
+- After switching, the program creates a hyprland config file to respect the new windowing mode.
+  Let's say you switched to tiling mode. From that point on, new windows will open in tiling mode as well.
+  Switch to floating mode again and newly opened windows will be in floating mode.
 
 * Compiling
 
