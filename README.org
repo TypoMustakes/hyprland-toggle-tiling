@@ -26,7 +26,7 @@ A simple program to toggle tiling and floating modes for windows in the Hyprland
 
 * Integration with Hyprland
 1. Whatever configuration path you specify, include it in your Hyprland config, like so:
-   ~\~/path/to/your/hyprland.conf~:
+   ~~/path/to/your/hyprland.conf~:
    #+BEGIN_SRC conf
    source = ~/path/to/specified/config/file.conf
    #+END_SRC
