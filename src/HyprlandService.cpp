@@ -6,6 +6,22 @@
 
 using json = nlohmann::json;
 
+std::string HyprlandService::configFilePath;
+
+void HyprlandService::setConfigFilePath(std::string path) {
+  //Look for substring "~/". If found, expand it
+  const std::string tilde = "~/";
+  size_t pos = path.find(tilde);
+  if (pos != std::string::npos) {
+    path.replace(pos, tilde.length(), ShellService::getHomePath());
+  }
+  configFilePath = path;
+};
+
+std::string HyprlandService::getConfigFilePath() {
+  return configFilePath;
+};
+
 Workspace HyprlandService::getCurrentWorkspace() {
   json j = json::parse(ShellService::exec(HYPRCTL_BINARY " activeworkspace -j"));
   return j.get<Workspace>();
@@ -34,7 +50,7 @@ std::list<Client> HyprlandService::getClientsOnActiveWorkspace() {
 std::list<WindowRule> HyprlandService::getWindowRules() {
   std::list<WindowRule> rules;
 
-  for (auto& line : FileService::readLines(ShellService::getHomePath()+FLOATING_RULE_CONF_FILE)) {
+  for (auto& line : FileService::readLines(getConfigFilePath())) {
     rules.push_back(WindowRule::parse(line));
   }
 
@@ -63,7 +79,7 @@ void HyprlandService::setFloatingRule(bool on) {
   }
 
   FileService::appendToFile(
-    ShellService::getHomePath() + FLOATING_RULE_CONF_FILE,
+    getConfigFilePath(),
     rule.toString()
   );
 };
@@ -98,7 +114,7 @@ void HyprlandService::removeRule(WindowRule rule) {
 
   if (foundIndex != -1) {
     FileService::deleteNthLine(
-      ShellService::getHomePath() + FLOATING_RULE_CONF_FILE,
+      getConfigFilePath(),
       foundIndex
     );
   }
