@@ -17,6 +17,27 @@ A simple program to toggle tiling and floating modes for windows in the Hyprland
   Let's say you switched to tiling mode. From that point on, new windows will open in tiling mode as well.
   Switch to floating mode again and newly opened windows will be in floating mode.
 
+* Usage
+#+BEGIN_SRC shell
+./htt <config-file-path>
+#+END_SRC
+- If the specified configuration file does not exist, it will be created.
+- If the configuration contains existing rules, this should still work, but your existing configuration will probably get a bit messy, syntax-wise. I advise against it.
+
+* Ingetration with Hyprland
+1. Whatever configuration path you specify, include it in your Hyprland config, like so:
+   ~\~/path/to/your/hyprland.conf~:
+   #+BEGIN_SRC conf
+   source = ~/path/to/specified/config/file.conf
+   #+END_SRC
+
+2. Bind the script to a key in your Hyprland config:
+    #+BEGIN_SRC conf
+    bind = $mod + t, exec, /path/to/htt <config-file-path>
+    #+END_SRC
+
+    Or not. Do whatever you want.
+
 * Compiling
 
 1. Clone this repository:
@@ -28,11 +49,6 @@ A simple program to toggle tiling and floating modes for windows in the Hyprland
     #+BEGIN_SRC shell
     cd build/
     cmake --build .
-    #+END_SRC
-
-3. Bind the script to a key in your Hyprland config:
-    #+BEGIN_SRC conf
-    bind = $mod + t, exec, /path/to/htt
     #+END_SRC
 
 Or just [[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.0][download the release]].
