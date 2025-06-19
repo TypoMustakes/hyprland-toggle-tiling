@@ -2,8 +2,6 @@
 #+AUTHOR: Your Name
 #+OPTIONS: toc:nil
 
-* hyprland-toggle-tiling
-
 A simple program to toggle tiling and floating modes for windows in the Hyprland Wayland compositor.
 
 [[./demo.gif]]
@@ -20,28 +18,18 @@ A simple program to toggle tiling and floating modes for windows in the Hyprland
 - Useful for workflows that require both tiling and floating window management.
 - Lightweight and easy to integrate with your Hyprland setup.
 
-* Usage
-#+BEGIN_SRC shell
-./htt <config-file-path>
-#+END_SRC
-- If the specified configuration file does not exist, it will be created.
-- If the configuration contains existing rules, this should still work, but your existing configuration will probably get a bit messy, syntax-wise. I advise against it.
+* Installation
 
-* Integration with Hyprland
-1. Whatever configuration path you specify, include it in your Hyprland config, like so:
-   ~~/path/to/your/hyprland.conf~:
-   #+BEGIN_SRC conf
-   source = ~/path/to/specified/config/file.conf
-   #+END_SRC
+** Install from AUR
 
-2. Bind the script to a key in your Hyprland config:
-    #+BEGIN_SRC conf
-    bind = $mod + t, exec, /path/to/htt <config-file-path>
-    #+END_SRC
+You may install this program [[https://aur.archlinux.org/packages/hyprland-toggle-tiling-git][from the AUR.]]
 
-    Or not. Do whatever you want.
+** Download the release
 
-* Compiling
+[[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.1.0][Download the release binary]].
+
+
+** Compile from source
 
 1. Clone this repository:
     #+BEGIN_SRC shell
@@ -68,4 +56,24 @@ A simple program to toggle tiling and floating modes for windows in the Hyprland
     cmake --build .
     #+END_SRC
 
-Or just [[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.1.0][download the release]].
+* Usage
+#+BEGIN_SRC shell
+./htt <config-file-path>
+#+END_SRC
+- If the specified configuration file does not exist, it will be created.
+- If the configuration contains existing rules, this should still work, but your existing configuration will probably get a bit messy, syntax-wise. I advise against it.
+
+* Integration with Hyprland
+1. Whatever configuration path you specify, include it in your Hyprland config, like so:
+   ~~/path/to/your/hyprland.conf~:
+   #+BEGIN_SRC conf
+   source = ~/path/to/specified/config/file.conf
+   #+END_SRC
+
+2. Bind the script to a key in your Hyprland config:
+    #+BEGIN_SRC conf
+    bind = $mod + t, exec, /path/to/htt <config-file-path>
+    #+END_SRC
+
+    Or not. Do whatever you want.
+
