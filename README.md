@@ -11,8 +11,9 @@
 
 A simple program to toggle tiling and floating modes for windows in the Hyprland Wayland compositor.
 
-[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/src/branch/master/assets/demo.webm](See demo)
-![](./assets/demo.webm)
+<video width="320" height="240" controls>
+  <source src="./assets/demo.webm" type="video/webm">
+</video>
 
 </div>
 
