@@ -33,11 +33,11 @@ A simple program to toggle tiling and floating modes for windows in the Hyprland
 
 ### Install from AUR
 
-You may install this program [https://aur.archlinux.org/packages/hyprland-toggle-tiling-git](from the AUR.)
+You may install this program [from the AUR.](https://aur.archlinux.org/packages/hyprland-toggle-tiling-git)
 
 ### Download the release
 
-[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.1.0](Download the release binary).
+[Download the release binary.](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.1.0)
 
 ### Compile from source
 
