@@ -26,9 +26,7 @@ Check out [the demo](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-til
 
 - Quickly switch between tiling and floating modes for all windows on the active workspace.
 - After switching, the program creates a hyprland config file to respect the new windowing mode.
-
   Let's say you switched to tiling mode. From that point on, new windows will open in tiling mode as well.
-
   Switch to floating mode again and newly opened windows will be in floating mode.
 - Floating/tiling window rules are isolated between workspaces. You can set one workspace to be floating, and all the rest to tiling for example.
 - Useful for workflows that require both tiling and floating window management.
