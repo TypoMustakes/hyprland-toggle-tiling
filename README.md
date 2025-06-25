@@ -1,19 +1,22 @@
-#+TITLE: hyprland-toggle-tiling
-#+AUTHOR: Your Name
-#+OPTIONS: toc:nil
+<div align="center">
+<img src="assets/icon.svg" alt="HTT logo" width="120" height="120"/>
 
-[![Rust](https://img.shields.io/badge/Built_with_C%2B%2B-a?style=for-the-badge&logo=cplusplus&labelColor=%230062A1&color=black)](https://cplusplus.com/)
+# HTT - Hyprland Toggle Tiling
+
+[![C++](https://img.shields.io/badge/Built_with_C%2B%2B-a?style=for-the-badge&logo=cplusplus&labelColor=%230062A1&color=black)](https://cplusplus.com/)
 [![Hyprland](https://img.shields.io/badge/Hyprland-a?style=for-the-badge&logo=hyprland&labelColor=black&color=%2367E8F9)](https://hyprland.org/)
 [![GPL3 License](https://img.shields.io/badge/GPL3_License-a?style=for-the-badge&logo=gnu&logoColor=black&labelColor=white&color=black)](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/src/branch/master/LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained-a?style=for-the-badge&logo=ticktick&logoColor=white&labelColor=black&color=white
-)](https://github.com/username/anny-dock/graphs/commit-activity)
+)](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/graph)
 
 A simple program to toggle tiling and floating modes for windows in the Hyprland Wayland compositor.
 
-[[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/src/branch/master/assets/demo.webm][See demo]]
-[[./assets/demo.webm]]
+[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/src/branch/master/assets/demo.webm](See demo)
+![](./assets/demo.webm)
 
-* Features
+</div>
+
+## Features
 
 - Quickly switch between tiling and floating modes for all windows on the active workspace.
 - After switching, the program creates a hyprland config file to respect the new windowing mode.
@@ -25,62 +28,61 @@ A simple program to toggle tiling and floating modes for windows in the Hyprland
 - Useful for workflows that require both tiling and floating window management.
 - Lightweight and easy to integrate with your Hyprland setup.
 
-* Installation
+## Installation
 
-** Install from AUR
+### Install from AUR
 
-You may install this program [[https://aur.archlinux.org/packages/hyprland-toggle-tiling-git][from the AUR.]]
+You may install this program [https://aur.archlinux.org/packages/hyprland-toggle-tiling-git](from the AUR.)
 
-** Download the release
+### Download the release
 
-[[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.1.0][Download the release binary]].
+[https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.1.0](Download the release binary).
 
-
-** Compile from source
+### Compile from source
 
 1. Clone this repository:
-    #+BEGIN_SRC shell
+    ```shell
     git clone https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling.git
-    #+END_SRC
+    ```
 
 2. Enter project directory:
-    #+BEGIN_SRC shell
+    ```shell
     cd hyprland-toggle-tiling/
-    #+END_SRC
+    ```
 
 3. Create build directory:
-    #+BEGIN_SRC shell
+    ```shell
     cmake -S . -B build/
-    #+END_SRC
+    ```
 
 4. Enter build directory:
-    #+BEGIN_SRC shell
+    ```shell
     cd build/
-    #+END_SRC
+    ```
 
 5. Build the projects:
-    #+BEGIN_SRC shell
+    ```shell
     cmake --build .
-    #+END_SRC
+    ```
 
-* Usage
-#+BEGIN_SRC shell
+# Usage
+```shell
 ./htt <config-file-path>
-#+END_SRC
+```
 - If the specified configuration file does not exist, it will be created.
 - If the configuration contains existing rules, this should still work, but your existing configuration will probably get a bit messy, syntax-wise. I advise against it.
 
-* Integration with Hyprland
+# Integration with Hyprland
 1. Whatever configuration path you specify, include it in your Hyprland config, like so:
    ~~/path/to/your/hyprland.conf~:
-   #+BEGIN_SRC conf
+   ```conf
    source = ~/path/to/specified/config/file.conf
-   #+END_SRC
+   ```
 
 2. Bind the script to a key in your Hyprland config:
-    #+BEGIN_SRC conf
+    ```conf
     bind = $mod + t, exec, /path/to/htt <config-file-path>
-    #+END_SRC
+    ```
 
     Or not. Do whatever you want.
 
