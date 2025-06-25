@@ -13,15 +13,12 @@ Logo taken from [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon
 
 A simple program to toggle tiling and floating modes for windows in the Hyprland Wayland compositor.
 
+Check out [the demo](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/src/commit/da423421aaa99f906962e3fd0330d0d88b5b1aa2/assets/demo.webm)!
+
 [Features](#features) •
 [Installation](#installation) •
 [Usage](#usage) •
 [Integration with Hyprland](#integration-with-hyprland)
-
-<video width="480" height="360" controls>
-  <source src="assets/demo.webm" type="video/webm">
-  Video unsupported
-</video>
 
 </div>
 
