@@ -3,6 +3,8 @@
 
 # HTT - Hyprland Toggle Tiling
 
+Logo taken from [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme). I'm not a designer, don't judge me.
+
 [![C++](https://img.shields.io/badge/Built_with_C%2B%2B-a?style=for-the-badge&logo=cplusplus&labelColor=%230062A1&color=black)](https://cplusplus.com/)
 [![Hyprland](https://img.shields.io/badge/Hyprland-a?style=for-the-badge&logo=hyprland&labelColor=black&color=%2367E8F9)](https://hyprland.org/)
 [![GPL3 License](https://img.shields.io/badge/GPL3_License-a?style=for-the-badge&logo=gnu&logoColor=black&labelColor=white&color=black)](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/src/branch/master/LICENSE)
@@ -11,8 +13,9 @@
 
 A simple program to toggle tiling and floating modes for windows in the Hyprland Wayland compositor.
 
-<video width="320" height="240" controls>
-  <source src="./assets/demo.webm" type="video/webm">
+<video width="480" height="360" controls>
+  <source src="assets/demo.webm" type="video/webm">
+  Video unsupported
 </video>
 
 </div>
@@ -31,13 +34,17 @@ A simple program to toggle tiling and floating modes for windows in the Hyprland
 
 ## Installation
 
+You have a few options of obtainting the program.
+
 ### Install from AUR
 
 You may install this program [from the AUR.](https://aur.archlinux.org/packages/hyprland-toggle-tiling-git)
 
 ### Download the release
 
-[Download the release binary.](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.1.0)
+You can also [download the release binary.](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.1.0)
+
+or go nuts and...
 
 ### Compile from source
 
@@ -75,7 +82,7 @@ You may install this program [from the AUR.](https://aur.archlinux.org/packages/
 
 # Integration with Hyprland
 1. Whatever configuration path you specify, include it in your Hyprland config, like so:
-   ~~/path/to/your/hyprland.conf~:
+   `/path/to/your/hyprland.conf`:
    ```conf
    source = ~/path/to/specified/config/file.conf
    ```
