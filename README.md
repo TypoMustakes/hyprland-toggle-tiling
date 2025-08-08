@@ -7,13 +7,13 @@ Logo taken from [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon
 
 [![C++](https://img.shields.io/badge/Built_with_C%2B%2B-a?style=for-the-badge&logo=cplusplus&labelColor=%230062A1&color=black)](https://cplusplus.com/)
 [![Hyprland](https://img.shields.io/badge/Hyprland-a?style=for-the-badge&logo=hyprland&labelColor=black&color=%2367E8F9)](https://hyprland.org/)
-[![GPL3 License](https://img.shields.io/badge/GPL3_License-a?style=for-the-badge&logo=gnu&logoColor=black&labelColor=white&color=black)](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/src/branch/master/LICENSE)
+[![GPL3 License](https://img.shields.io/badge/GPL3_License-a?style=for-the-badge&logo=gnu&logoColor=black&labelColor=white&color=black)](https://github.com/TypoMustakes/hyprland-toggle-tiling/blob/master/LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained-a?style=for-the-badge&logo=ticktick&logoColor=white&labelColor=black&color=white
-)](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/graph)
+)](https://github.com/TypoMustakes/hyprland-toggle-tiling/commits/master/)
 
 A simple program to toggle tiling and floating modes for windows in the Hyprland Wayland compositor.
 
-Check out [the demo](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/src/commit/da423421aaa99f906962e3fd0330d0d88b5b1aa2/assets/demo.webm)!
+Check out [the demo](assets/demo.webm)!
 
 [Features](#features) •
 [Installation](#installation) •
@@ -42,7 +42,7 @@ You may install this program [from the AUR.](https://aur.archlinux.org/packages/
 
 ### Download the release
 
-You can also [download the release binary.](https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling/releases/tag/1.1.0)
+You can also [download the release binary.](https://github.com/TypoMustakes/hyprland-toggle-tiling/releases/)
 
 or go nuts and...
 
@@ -50,7 +50,7 @@ or go nuts and...
 
 1. Clone this repository:
     ```shell
-    git clone https://typofelho.ddns.net/TypoMustakes/hyprland-toggle-tiling.git
+    git clone https://github.com/TypoMustakes/hyprland-toggle-tiling.git
     ```
 
 2. Enter project directory:
