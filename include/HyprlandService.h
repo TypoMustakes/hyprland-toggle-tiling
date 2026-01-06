@@ -23,5 +23,6 @@ class HyprlandService {
     static void setClientTiled(Client&);
     static void toggleClientFloating(Client&);
     static bool isFloatingRulePresent();
+    static WindowRule getActiveWorkspaceRule();
 };
 #endif
