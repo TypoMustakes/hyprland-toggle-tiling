@@ -29,6 +29,7 @@ Check out [the demo](assets/demo.webm)!
   Let's say you switched to tiling mode. From that point on, new windows will open in tiling mode as well.
   Switch to floating mode again and newly opened windows will be in floating mode.
 - Floating/tiling window rules are isolated between workspaces. You can set one workspace to be floating, and all the rest to tiling for example.
+- Returns applied rule for the current workspace. Useful for scripting.
 - Useful for workflows that require both tiling and floating window management.
 - Lightweight and easy to integrate with your Hyprland setup.
 
@@ -75,8 +76,17 @@ or go nuts and...
 
 # Usage
 ```shell
-./htt <config-file-path>
+./htt <config-file-path> (-q)
 ```
+- `-q`: Print the rule applied on the current workspace to STDOUT, but don't change anything. If there isn't an active rule for the current workspace, it returns a tiling rule. The returned string is a valid Hyprland window rule configuration line, like so:
+```shell
+# (On workspace 2...)
+$ ./htt ~/.cache/htt/rules -q
+windowrule = tile on, match:workspace 2
+```
+Potential applications for this are mainly scripts, like my waybar module here:
+![wayland module showcase](assets/waybar_module.gif)
+
 - If the specified configuration file does not exist, it will be created.
 - If the configuration contains existing rules, this should still work, but your existing configuration will probably get a bit messy, syntax-wise. I advise against it.
 

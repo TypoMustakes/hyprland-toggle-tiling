@@ -135,3 +135,17 @@ bool HyprlandService::isFloatingRulePresent() {
 
   return false;
 };
+
+WindowRule HyprlandService::getActiveWorkspaceRule() {
+  std::list<WindowRule> rules = getWindowRules();
+  int id = getCurrentWorkspace().id;
+
+  for (auto& rule : rules) {
+    if (rule.workspaceID == id) {
+      return rule;
+    }
+  }
+
+  //If no rule is found, return a default rule (tiled)
+  return WindowRule {.tile = true, .workspaceID = id};
+};
