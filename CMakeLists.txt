@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10.0)
-project(hyprland-toggle-tiling VERSION 0.1.0 LANGUAGES C CXX)
+project(hyprland-toggle-tiling VERSION 1.4.0 LANGUAGES C CXX)
 
 include(FetchContent)
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz)

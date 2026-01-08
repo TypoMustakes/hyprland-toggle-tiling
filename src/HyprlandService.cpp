@@ -1,4 +1,6 @@
 #include <nlohmann/json.hpp>
+#include <optional>
+#include <string>
 #include "../include/HyprlandService.h"
 #include "../include/ShellService.h"
 #include "../include/Macros.h"
@@ -22,10 +24,34 @@ std::string HyprlandService::getConfigFilePath() {
   return configFilePath;
 };
 
+std::list<Workspace> HyprlandService::getWorkspaces() {
+  json j = json::parse(ShellService::exec(HYPRCTL_BINARY " workspaces -j"));
+  return j.get<std::list<Workspace>>();
+}
+
+std::optional<Workspace> HyprlandService::getWorkspace(int id) {
+  std::list<Workspace> workspaces = getWorkspaces();
+  
+  for (auto it = workspaces.begin(); it != workspaces.end(); ) {
+    if (it->id == id) {
+	  return *it;
+    } else {
+      ++it;
+    }
+  }
+
+  return std::nullopt;
+}
+
 Workspace HyprlandService::getCurrentWorkspace() {
   json j = json::parse(ShellService::exec(HYPRCTL_BINARY " activeworkspace -j"));
   return j.get<Workspace>();
 };
+
+Client HyprlandService::getActiveClient() {
+  json j = json::parse(ShellService::exec(HYPRCTL_BINARY " activewindow -j"));
+  return j.get<Client>();
+}
 
 std::list<Client> HyprlandService::getClients() {
   json j = json::parse(ShellService::exec(HYPRCTL_BINARY " clients -j"));
@@ -57,17 +83,13 @@ std::list<WindowRule> HyprlandService::getWindowRules() {
   return rules;
 };
 
-void HyprlandService::setClientFloating(Client& c) {
+void HyprlandService::setClientFloating(Client c) {
   ShellService::exec(HYPRCTL_BINARY " dispatch setfloating address:" + c.address);
 };
 
-void HyprlandService::setClientTiled(Client& c) {
+void HyprlandService::setClientTiled(Client c) {
   ShellService::exec(HYPRCTL_BINARY " dispatch settiled address:" + c.address);
 }
-
-void HyprlandService::toggleClientFloating(Client& c) {
-  ShellService::exec(HYPRCTL_BINARY " dispatch togglefloating address:" + c.address);
-};
 
 //on = true -> creates a window rule to ENABLE floating mode for currently active workspace
 //on = false -> creates a window rule to DISABLE floating mode for currently active workspace
@@ -122,18 +144,20 @@ void HyprlandService::removeRule(WindowRule rule) {
   //else: rule not found, do nothing
 }
 
-bool HyprlandService::isFloatingRulePresent() {
-  //Checks if there's a valid window rule in place that enables floating mode for the currently active workspace
+bool HyprlandService::isFloatingRulePresent(int workspaceId) {
   std::list<WindowRule> rules = getWindowRules();
-  int id = getCurrentWorkspace().id;
 
   for (auto& rule : rules) {
-    if (rule.workspaceID == id && rule.tile == false) {
+    if (rule.workspaceID == workspaceId && rule.tile == false) {
       return true;
     }
   }
 
   return false;
+}
+
+bool HyprlandService::isFloatingRulePresent(Workspace workspace) {
+  return isFloatingRulePresent(workspace.id);
 };
 
 WindowRule HyprlandService::getActiveWorkspaceRule() {
@@ -149,3 +173,27 @@ WindowRule HyprlandService::getActiveWorkspaceRule() {
   //If no rule is found, return a default rule (tiled)
   return WindowRule {.tile = true, .workspaceID = id};
 };
+
+void HyprlandService::moveToWorkspace(int workspaceId) {
+  if (isFloatingRulePresent(workspaceId)) {
+	setClientFloating(getActiveClient());
+  } else {
+	setClientTiled(getActiveClient());
+  }
+  
+  ShellService::exec(HYPRCTL_BINARY " dispatch movetoworkspace " + std::to_string(workspaceId));
+}
+
+void HyprlandService::toggleFloating() {
+  if (isFloatingRulePresent(getCurrentWorkspace())) {
+    for (auto& c : getClientsOnActiveWorkspace()) {
+	  setClientTiled(c);
+    }
+    setFloatingRule(false);
+  } else {
+    for (auto& c : getClientsOnActiveWorkspace()) {
+	  setClientFloating(c);
+    }
+    setFloatingRule(true);
+  }
+}

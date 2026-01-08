@@ -87,6 +87,8 @@ windowrule = tile on, match:workspace 2
 Potential applications for this are mainly scripts, like my waybar module here:
 ![wayland module showcase](assets/waybar_module.gif)
 
+- `-m [integer]`: Move currently active window to specified workspace. Upon moving, the window will adapt to the windowing mode of the new workspace. Doesn't work with `-q`. See ![the 1.4 changelog](https://github.com/TypoMustakes/hyprland-toggle-tiling/releases/tag/v1.4) for details.
+
 - If the specified configuration file does not exist, it will be created.
 - If the configuration contains existing rules, this should still work, but your existing configuration will probably get a bit messy, syntax-wise. I advise against it.
 
