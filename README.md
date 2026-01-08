@@ -30,6 +30,7 @@ Check out [the demo](assets/demo.webm)!
   Switch to floating mode again and newly opened windows will be in floating mode.
 - Floating/tiling window rules are isolated between workspaces. You can set one workspace to be floating, and all the rest to tiling for example.
 - Returns applied rule for the current workspace. Useful for scripting.
+- Moving a window from a tiling workspace to a floating one changes the float state of the window to respect the new workspace.
 - Useful for workflows that require both tiling and floating window management.
 - Lightweight and easy to integrate with your Hyprland setup.
 
@@ -87,6 +88,8 @@ windowrule = tile on, match:workspace 2
 Potential applications for this are mainly scripts, like my waybar module here:
 ![wayland module showcase](assets/waybar_module.gif)
 
+- `-m [integer]`: Move currently active window to specified workspace. Upon moving, the window will adapt to the windowing mode of the new workspace. Doesn't work with `-q`. See ![the 1.4 changelog](https://github.com/TypoMustakes/hyprland-toggle-tiling/releases/tag/v1.4) for details.
+
 - If the specified configuration file does not exist, it will be created.
 - If the configuration contains existing rules, this should still work, but your existing configuration will probably get a bit messy, syntax-wise. I advise against it.
 
@@ -102,5 +105,37 @@ Potential applications for this are mainly scripts, like my waybar module here:
     bind = $mod + t, exec, /path/to/htt <config-file-path>
     ```
 
-    Or not. Do whatever you want.
+3. If you want windows to respect workspaces' rules after moving them to another workspace (see ![the 1.4 changelog](https://github.com/TypoMustakes/hyprland-toggle-tiling/releases/tag/v1.4) for details), you might want to tell HTT to move your windows instead of telling Hyprland.
+On the default configuration, this would mean changing this:
+
+```sh
+bind = $mainMod SHIFT, 1, movetoworkspace, 1
+bind = $mainMod SHIFT, 2, movetoworkspace, 2
+bind = $mainMod SHIFT, 3, movetoworkspace, 3
+bind = $mainMod SHIFT, 4, movetoworkspace, 4
+bind = $mainMod SHIFT, 5, movetoworkspace, 5
+bind = $mainMod SHIFT, 6, movetoworkspace, 6
+bind = $mainMod SHIFT, 7, movetoworkspace, 7
+bind = $mainMod SHIFT, 8, movetoworkspace, 8
+bind = $mainMod SHIFT, 9, movetoworkspace, 9
+bind = $mainMod SHIFT, 0, movetoworkspace, 10
+```
+
+to this:
+
+```sh
+bind = $mainMod SHIFT, 1, exec, htt [your htt config file] -m 1
+bind = $mainMod SHIFT, 2, exec, htt [your htt config file] -m 2
+bind = $mainMod SHIFT, 3, exec, htt [your htt config file] -m 3
+bind = $mainMod SHIFT, 4, exec, htt [your htt config file] -m 4
+bind = $mainMod SHIFT, 5, exec, htt [your htt config file] -m 5
+bind = $mainMod SHIFT, 6, exec, htt [your htt config file] -m 6
+bind = $mainMod SHIFT, 7, exec, htt [your htt config file] -m 7
+bind = $mainMod SHIFT, 8, exec, htt [your htt config file] -m 8
+bind = $mainMod SHIFT, 9, exec, htt [your htt config file] -m 9
+bind = $mainMod SHIFT, 0, exec, htt [your htt config file] -m 10
+```
+
+... in your configuration.
+Otherwise, just use `exec, htt [your htt config file] -m [workspace ID]` wherever you used `movetoworkspace [workspace ID]` before.
 
