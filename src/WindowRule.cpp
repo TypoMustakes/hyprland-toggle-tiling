@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "../include/WindowRule.h"
+#include "../include/WindowRule.hpp"
 
 std::string WindowRule::toString() {
     std::string mode = this->tile ? "tile on" : "float on";

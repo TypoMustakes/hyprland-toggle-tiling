@@ -1,8 +1,8 @@
 #include <sstream>
 #include <fstream>
-#include "../include/FileService.h"
-#include "../include/Macros.h"
-#include "../include/ShellService.h"
+#include "../include/FileService.hpp"
+#include "../include/Macros.hpp"
+#include "../include/ShellService.hpp"
 
 bool FileService::doesNonEmptyFileExist(std::string path) {
     std::ifstream file(path);

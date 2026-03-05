@@ -23,7 +23,6 @@ class Client {
   std::array<int, 2> size;
   WorkspaceSignature workspace;
   bool floating;
-  bool pseudo;
   int monitor;
   std::string className;
   std::string title;
@@ -34,6 +33,7 @@ class Client {
   bool pinned;
   int fullscreen;
   int fullscreenClient;
+  bool overFullscreen;
   std::string swallowing;
   int focusHistory;
   bool inhibitingIdle;

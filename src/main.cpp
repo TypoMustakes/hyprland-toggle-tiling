@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdexcept>
-#include "../include/HyprlandService.h"
+#include "../include/HyprlandService.hpp"
 
 void help(char* execPath) {
 	std::cerr << "Usage: " << execPath << " <config_file_path> (flags)\n\n";
@@ -20,7 +20,6 @@ int main(int argc, char** argv) {
 	else if (argc == 3 && argv[2] == std::string("-q")) {
 	  std::cout << HyprlandService::getActiveWorkspaceRule().toString() << std::endl;
 	} else if (argc == 4 && argv[2] == std::string("-m")) {
-	  int workspace = 0;
 	  try {
 		HyprlandService::moveToWorkspace(std::stoi(argv[3]));
 	  } catch (std::invalid_argument) {

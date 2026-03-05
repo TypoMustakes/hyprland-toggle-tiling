@@ -2,9 +2,9 @@
 #define HYPRLAND_SERVICE_H
 
 #include <list>
-#include "Workspace.h"
-#include "Client.h"
-#include "WindowRule.h"
+#include "Workspace.hpp"
+#include "Client.hpp"
+#include "WindowRule.hpp"
 
 class HyprlandService {
   private:
