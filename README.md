@@ -42,6 +42,34 @@ You have a few options of obtainting the program.
 
 You may install this program [from the AUR.](https://aur.archlinux.org/packages/hyprland-toggle-tiling-git)
 
+### Nix Flake (for Nix users)
+
+This project provides a Nix flake for reproducible builds and easy installation.
+
+#### Build the package
+
+```shell
+nix build git+ssh://git@github.com/TypoMustakes/hyprland-toggle-tiling.git
+```
+
+The binary will be at `./result/bin/htt`.
+
+#### Add to Home Manager
+
+1. Add the flake as an input:
+
+```shell
+inputs.htt.url = "git+ssh://git@github.com/TypoMustakes/hyprland-toggle-tiling.git";
+```
+
+2. Then include it in your configuration:
+
+```shell
+home.packages = [
+    inputs.htt.packages.${pkgs.system}.default
+];
+```
+
 ### Download the release
 
 You can also [download the release binary.](https://github.com/TypoMustakes/hyprland-toggle-tiling/releases/)
