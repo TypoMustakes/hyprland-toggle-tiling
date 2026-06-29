@@ -10,12 +10,16 @@ using json = nlohmann::json;
 
 std::string HyprlandService::configFilePath;
 
+void HyprlandService::reload() {
+  ShellService::exec(HYPRCTL_BINARY " reload");
+}
+
 void HyprlandService::setConfigFilePath(std::string path) {
   // Look for substring "~/". If found, expand it
   const std::string tilde = "~/";
   size_t pos = path.find(tilde);
   if (pos != std::string::npos) {
-    path.replace(pos, tilde.length(), ShellService::getHomePath());
+	path.replace(pos, tilde.length(), ShellService::getHomePath());
   }
   configFilePath = path;
 };
@@ -31,11 +35,11 @@ std::optional<Workspace> HyprlandService::getWorkspace(int id) {
   std::list<Workspace> workspaces = getWorkspaces();
 
   for (auto it = workspaces.begin(); it != workspaces.end();) {
-    if (it->id == id) {
-      return *it;
-    } else {
-      ++it;
-    }
+	if (it->id == id) {
+	  return *it;
+	} else {
+	  ++it;
+	}
   }
 
   return std::nullopt;
@@ -43,7 +47,7 @@ std::optional<Workspace> HyprlandService::getWorkspace(int id) {
 
 Workspace HyprlandService::getCurrentWorkspace() {
   json j =
-      json::parse(ShellService::exec(HYPRCTL_BINARY " activeworkspace -j"));
+	  json::parse(ShellService::exec(HYPRCTL_BINARY " activeworkspace -j"));
   return j.get<Workspace>();
 };
 
@@ -62,11 +66,11 @@ std::list<Client> HyprlandService::getClientsOnActiveWorkspace() {
   int activeWorkspaceID = getCurrentWorkspace().id;
 
   for (auto it = clients.begin(); it != clients.end();) {
-    if (it->workspace.id != activeWorkspaceID) {
-      it = clients.erase(it);
-    } else {
-      ++it;
-    }
+	if (it->workspace.id != activeWorkspaceID) {
+	  it = clients.erase(it);
+	} else {
+	  ++it;
+	}
   }
 
   return clients;
@@ -76,7 +80,7 @@ std::list<WindowRule> HyprlandService::getWindowRules() {
   std::list<WindowRule> rules;
 
   for (auto &line : FileService::readLines(getConfigFilePath())) {
-    rules.push_back(WindowRule::parse(line));
+	rules.push_back(WindowRule::parse(line));
   }
 
   return rules;
@@ -84,7 +88,7 @@ std::list<WindowRule> HyprlandService::getWindowRules() {
 
 void HyprlandService::setClientFloating(Client c) {
   ShellService::exec(HYPRCTL_BINARY " dispatch setfloating address:" +
-                     c.address);
+					 c.address);
 };
 
 void HyprlandService::setClientTiled(Client c) {
@@ -98,10 +102,11 @@ void HyprlandService::setFloatingRule(bool on) {
   WindowRule rule{.tile = !on, .workspaceID = getCurrentWorkspace().id};
   auto conflictingRule = findConflictingRule(rule);
   if (conflictingRule.has_value()) {
-    removeRule(conflictingRule.value());
+	removeRule(conflictingRule.value());
   }
 
   FileService::appendToFile(getConfigFilePath(), rule.toString());
+  reload();
 };
 
 std::optional<WindowRule>
@@ -110,9 +115,9 @@ HyprlandService::findConflictingRule(WindowRule subject) {
   int id = getCurrentWorkspace().id;
 
   for (auto &rule : rules) {
-    if (rule.tile == !subject.tile && rule.workspaceID == subject.workspaceID) {
-      return rule;
-    }
+	if (rule.tile == !subject.tile && rule.workspaceID == subject.workspaceID) {
+	  return rule;
+	}
   }
 
   return std::nullopt;
@@ -124,15 +129,15 @@ void HyprlandService::removeRule(WindowRule rule) {
   int foundIndex = -1;
 
   for (auto &it : rules) {
-    if (it.toString() == rule.toString()) {
-      foundIndex = index;
-      break;
-    }
-    ++index;
+	if (it.toString() == rule.toString()) {
+	  foundIndex = index;
+	  break;
+	}
+	++index;
   }
 
   if (foundIndex != -1) {
-    FileService::deleteNthLine(getConfigFilePath(), foundIndex);
+	FileService::deleteNthLine(getConfigFilePath(), foundIndex);
   }
 
   // else: rule not found, do nothing
@@ -142,9 +147,9 @@ bool HyprlandService::isFloatingRulePresent(int workspaceId) {
   std::list<WindowRule> rules = getWindowRules();
 
   for (auto &rule : rules) {
-    if (rule.workspaceID == workspaceId && rule.tile == false) {
-      return true;
-    }
+	if (rule.workspaceID == workspaceId && rule.tile == false) {
+	  return true;
+	}
   }
 
   return false;
@@ -159,9 +164,9 @@ WindowRule HyprlandService::getActiveWorkspaceRule() {
   int id = getCurrentWorkspace().id;
 
   for (auto &rule : rules) {
-    if (rule.workspaceID == id) {
-      return rule;
-    }
+	if (rule.workspaceID == id) {
+	  return rule;
+	}
   }
 
   // If no rule is found, return a default rule (tiled)
@@ -170,25 +175,25 @@ WindowRule HyprlandService::getActiveWorkspaceRule() {
 
 void HyprlandService::moveToWorkspace(int workspaceId) {
   if (isFloatingRulePresent(workspaceId)) {
-    setClientFloating(getActiveClient());
+	setClientFloating(getActiveClient());
   } else {
-    setClientTiled(getActiveClient());
+	setClientTiled(getActiveClient());
   }
 
   ShellService::exec(HYPRCTL_BINARY " dispatch movetoworkspace " +
-                     std::to_string(workspaceId));
+					 std::to_string(workspaceId));
 }
 
 void HyprlandService::toggleFloating() {
   if (isFloatingRulePresent(getCurrentWorkspace())) {
-    for (auto &c : getClientsOnActiveWorkspace()) {
-      setClientTiled(c);
-    }
-    setFloatingRule(false);
+	for (auto &c : getClientsOnActiveWorkspace()) {
+	  setClientTiled(c);
+	}
+	setFloatingRule(false);
   } else {
-    for (auto &c : getClientsOnActiveWorkspace()) {
-      setClientFloating(c);
-    }
-    setFloatingRule(true);
+	for (auto &c : getClientsOnActiveWorkspace()) {
+	  setClientFloating(c);
+	}
+	setFloatingRule(true);
   }
 }

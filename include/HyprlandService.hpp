@@ -28,6 +28,8 @@ class HyprlandService {
 
     static void setClientFloating(Client);
     static void setClientTiled(Client);
+
+    static void reload();
   public:
     static void toggleFloating();
     static void moveToWorkspace(int);
